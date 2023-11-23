@@ -4,9 +4,9 @@
 
 body {
     font-family: 'Comfortaa', sans-serif;
-    font-family: 'Manrope', sans-serif;
     margin: 0;
     background: #F3F6FD;
+    font-weight: 400;
 }
 
 .app {
@@ -74,4 +74,155 @@ body {
 
 .menu__add:hover {
     background-color: #e9ebf3;
+}
+
+.content {
+    min-width: 900px;
+    padding: 45px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #000;
+    font-size: 30px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 235px;
+}
+
+.progress__text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress_name {
+    color: #232360;
+    font-size: 14px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.progress_percent {
+    color: #768396;
+    font-size: 12px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.progress__bar {
+    width: 100%;
+    border-radius: 4px;
+    height: 5px;
+    background: #E6E9ED;
+    position: relative;
+}
+
+.progress__cover-bar {
+    position: absolute;
+    width: 50%;
+    height: 5px;
+    border-radius: 4px;
+    background: #5051F9;
+}
+
+main {
+    margin-top: 30px;
+}
+
+.habit {
+    border-radius: 10px;
+    background: #FFF;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.habit__day {
+    border-radius: 10px 0 0 10px;
+    background: #FBFAFF;
+    border-right: 1px solid #E7EBFB;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 20px 40px;
+    min-width: 150px;
+}
+
+.habit__comment {
+    font-size: 16px;
+    line-height: 18px;
+    padding: 20px 25px;
+}
+
+.habit__delete {
+    margin-left: auto;
+    margin-right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.habit__delete:hover {
+    background-color: #e9ebf3;
+}
+
+input {
+    border-radius: 9px;
+    border: 1px solid #E7EBFB;
+    background: #FFF;
+    padding: 12px 20px;
+    font-family: Comfortaa;
+    flex: 1;
+    font-size: 14px;
+    line-height: normal;
+}
+
+input::placeholder {
+    color: #8899A8;
+}
+
+.habit__form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 0px 10px 0px 25px;
+    position: relative;
+}
+
+.input_icon {
+    padding-left: 45px;
+
+}
+
+.input__icon {
+    position: absolute;
+    top: 10px;
+    left: 45px;
+}
+
+.habit_button {
+    border-radius: 9px;
+    background: #EDECFE;
+    border: none;
+    font-size: 13px;
+    line-height: normal;
+    color: #5051F9;
+    padding: 14px 30px;
+    cursor: pointer;
+}
+
+.habit_button:hover {
+    background: #dbd9ff;
 }
