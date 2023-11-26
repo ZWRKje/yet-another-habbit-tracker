@@ -18,14 +18,7 @@
         <div class="panel">
             <img class="logo" src="images/logo.svg" alt="Логотип Habit App">
             <nav class="menu">
-                <div class="menu__list">
-                    <button class="menu__item menu__item__active">
-                        <img src="./images/water.svg" alt="Вода">
-                    </button>
-                    <button class="menu__item">
-                        <img src="./images/food.svg" alt="Еда">
-                    </button>
-                </div>
+                <div class="menu__list"></div>
                 <button class="menu__add">
                     <img src="./images/add.svg" alt="Добавить привычку">
                 </button>
@@ -33,15 +26,14 @@
         </div>
         <div class="content">
             <header>
-                <h1>Отжимания</h1>
+                <h1 class="habit_name">-</h1>
                 <div class="progress">
                     <div class="progress__text">
                         <div class="progress_name">Прогресс</div>
-                        <div class="progress_percent">80%</div>
+                        <div class="progress_percent">%</div>
                     </div>
                     <div class="progress__bar">
                         <div class="progress__cover-bar">
-
                         </div>
                     </div>
                 </div>
@@ -72,7 +64,7 @@
             </main>
         </div>
     </div>
-    <script scr="./scripts/app.js"></script>
+    <script src="./scripts/app.js"></script>
 </body>
 
 </html>
