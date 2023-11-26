@@ -2,6 +2,7 @@
 
 let habits = [];
 const HABIT_KEY = 'HABIT_KEY';
+let globalActiveHabitId;
 
 /* page */
 const page = {
@@ -63,7 +64,6 @@ function renderHead(activeHabit) {
 }
 
 function rerenderContent(activeHabit) {
-  console.log(page.content.daysContainer);
   page.content.daysContainer.innerHTML = '';
   activeHabit.days.forEach((day, i) => {
     const habit = document.createElement('div');
@@ -71,7 +71,9 @@ function rerenderContent(activeHabit) {
     habit.innerHTML = ` <div class="habit__day">День ${i + 1}</div>
     <div class="habit__comment">${day.comment}</div>
     <button class="habit__delete">
-        <img src="./images/delete.svg" alt="Удалить день ${i + 1}">
+        <img src="./images/delete.svg" alt="Удалить день ${
+          i + 1
+        }" onClick="deleteDay(${i})">
     </button>`;
     page.content.daysContainer.appendChild(habit);
   });
@@ -82,6 +84,7 @@ function rerenderContent(activeHabit) {
 }
 
 function rerender(activeHabitId) {
+  globalActiveHabitId = activeHabitId;
   const activeHabit = habits.find((habit) => habit.id === activeHabitId);
   if (!activeHabit) {
     return;
@@ -89,6 +92,42 @@ function rerender(activeHabitId) {
   rerenderMenu(activeHabit);
   renderHead(activeHabit);
   rerenderContent(activeHabit);
+}
+
+/* work with days */
+function addDays(event) {
+  const form = event.target;
+  event.preventDefault();
+  const data = new FormData(form);
+  const comment = data.get('comment');
+  form['comment'].classList.remove('error');
+  if (!comment) {
+    form['comment'].classList.add('error');
+    return;
+  }
+  habits = habits.map((habit) => {
+    if (habit.id === globalActiveHabitId) {
+      return {
+        ...habit,
+        days: habit.days.concat([{ comment }]),
+      };
+    }
+    return habit;
+  });
+  saveData();
+  rerender(globalActiveHabitId);
+  form['comment'].value = '';
+}
+
+function deleteDay(dayId) {
+  habits.map((habit) => {
+    if (habit.id === globalActiveHabitId) {
+      habit.days.splice(dayId, 1);
+    }
+    return habit;
+  });
+  saveData();
+  rerender(globalActiveHabitId);
 }
 
 /* init */

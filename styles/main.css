@@ -193,6 +193,10 @@ input::placeholder {
     color: #8899A8;
 }
 
+input.error {
+    border: 1px solid red;
+}
+
 .habit__form {
     display: flex;
     gap: 10px;
