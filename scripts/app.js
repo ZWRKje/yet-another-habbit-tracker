@@ -16,6 +16,9 @@ const page = {
     daysContainer: document.getElementById('days'),
     nextDay: document.querySelector('.habit__day'),
   },
+  popup: {
+    index: document.getElementById('add-habit-popup'),
+  },
 };
 
 /* utils */
@@ -29,6 +32,15 @@ function loadData() {
 
 function saveData() {
   localStorage.setItem(HABIT_KEY, JSON.stringify(habits));
+}
+
+function togglePopup() {
+  const cover = page.popup.index.classList;
+  if (cover.contains('cover_hidden')) {
+    cover.remove('cover_hidden');
+  } else {
+    cover.add('cover_hidden');
+  }
 }
 
 /* render */

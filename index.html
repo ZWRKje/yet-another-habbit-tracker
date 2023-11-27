@@ -20,7 +20,7 @@
             <nav class="menu">
                 <div class="menu__list"></div>
                 <button class="menu__add">
-                    <img src="./images/add.svg" alt="Добавить привычку">
+                    <img src="./images/add.svg" alt="Добавить привычку" onclick="togglePopup()">
                 </button>
             </nav>
         </div>
@@ -52,7 +52,7 @@
                 </div>
             </main>
         </div>
-        <div class="cover cover_hidden">
+        <div class="cover cover_hidden" id="add-habit-popup">
             <div class="popup">
                 <h2>Новая привычка</h2>
                 <div class="icon-label">
@@ -75,7 +75,7 @@
                     <button class="habit_button" type="submit">Добавить</button>
                 </form>
                 <button class="popup_close">
-                    <img src="./images/close.svg" alt="Закрыть попап">
+                    <img src="./images/close.svg" alt="Закрыть попап" onclick="togglePopup()">
                 </button>
             </div>
         </div>
