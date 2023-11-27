@@ -18,6 +18,7 @@ const page = {
   },
   popup: {
     index: document.getElementById('add-habit-popup'),
+    iconField: document.querySelector('.popup__form input[name="icon"]'),
   },
 };
 
@@ -43,6 +44,28 @@ function togglePopup() {
   }
 }
 
+function validForm(event) {
+  const form = event.target;
+  let isValid = true;
+  const data = new FormData(form);
+  for (const child of form.children) {
+    const name = child.getAttribute('name');
+    if (name) {
+      child.classList.remove('error');
+      if (!data.get(`${name}`)) {
+        child.classList.add('error');
+        isValid = false;
+      }
+    }
+  }
+  return isValid;
+}
+
+function resetForm(form, fields) {
+  for (const field of fields) {
+    form[field].value = '';
+  }
+}
 /* render */
 function rerenderMenu(activeHabit) {
   for (const habit of habits) {
@@ -101,6 +124,7 @@ function rerender(activeHabitId) {
   if (!activeHabit) {
     return;
   }
+  console.log(activeHabit);
   rerenderMenu(activeHabit);
   renderHead(activeHabit);
   rerenderContent(activeHabit);
@@ -108,15 +132,13 @@ function rerender(activeHabitId) {
 
 /* work with days */
 function addDays(event) {
-  const form = event.target;
   event.preventDefault();
+  if (!validForm(event)) {
+    return false;
+  }
+  const form = event.target;
   const data = new FormData(form);
   const comment = data.get('comment');
-  form['comment'].classList.remove('error');
-  if (!comment) {
-    form['comment'].classList.add('error');
-    return;
-  }
   habits = habits.map((habit) => {
     if (habit.id === globalActiveHabitId) {
       return {
@@ -128,7 +150,7 @@ function addDays(event) {
   });
   saveData();
   rerender(globalActiveHabitId);
-  form['comment'].value = '';
+  resetForm(event.target, ['comment']);
 }
 
 function deleteDay(dayId) {
@@ -140,6 +162,33 @@ function deleteDay(dayId) {
   });
   saveData();
   rerender(globalActiveHabitId);
+}
+
+/* work with habits add*/
+function setIcon(context, icon) {
+  page.popup.iconField.value = icon;
+  const activeIcon = document.querySelector('.icon.icon_active');
+  activeIcon.classList.remove('icon_active');
+  context.classList.add('icon_active');
+}
+
+function addHabit(event) {
+  event.preventDefault();
+  if (!validForm(event)) {
+    return false;
+  }
+  const form = event.target;
+  const data = new FormData(form);
+  const name = data.get('name');
+  const icon = data.get('icon');
+  const target = data.get('target');
+  const maxId = habits.reduce((acc, habit) => habit.id > acc ? habit.id : acc, 0);
+  habits.push({ id: maxId + 1, icon, name, target, days: [] });
+
+  saveData();
+  rerender(maxId + 1);
+  resetForm(event.target, ['name', 'icon', 'target']);
+  togglePopup();
 }
 
 /* init */
