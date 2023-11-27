@@ -124,7 +124,7 @@ function rerender(activeHabitId) {
   if (!activeHabit) {
     return;
   }
-  console.log(activeHabit);
+  document.location.replace(document.location.pathname + '#' + activeHabitId);
   rerenderMenu(activeHabit);
   renderHead(activeHabit);
   rerenderContent(activeHabit);
@@ -182,7 +182,10 @@ function addHabit(event) {
   const name = data.get('name');
   const icon = data.get('icon');
   const target = data.get('target');
-  const maxId = habits.reduce((acc, habit) => habit.id > acc ? habit.id : acc, 0);
+  const maxId = habits.reduce(
+    (acc, habit) => (habit.id > acc ? habit.id : acc),
+    0
+  );
   habits.push({ id: maxId + 1, icon, name, target, days: [] });
 
   saveData();
@@ -194,5 +197,11 @@ function addHabit(event) {
 /* init */
 (() => {
   loadData();
-  rerender(habits[0].id);
+  const hashId = +document.location.hash.replace('#', '');
+  const urlHabit = habits.find((habit) => habit.id === hashId);
+  if (urlHabit) {
+    rerender(urlHabit.id);
+  } else {
+    rerender(habits[0].id);
+  }
 })();
